@@ -59,15 +59,15 @@ function BottomSheetContentComponent({
     /**
      * if container height is not yet calculated, then we exit the method
      */
-    if (animatedContainerHeight.get() === INITIAL_CONTAINER_HEIGHT) {
+    if (animatedContainerHeight.value === INITIAL_CONTAINER_HEIGHT) {
       return 0;
     }
 
-    const keyboardState = animatedKeyboardState.get();
-    const keyboardHeightInContainer = animatedKeyboardHeightInContainer.get();
-    const handleHeight = Math.max(0, animatedHandleHeight.get());
-    const containerHeight = animatedContainerHeight.get();
-    let contentHeight = animatedSheetHeight.get() - handleHeight;
+    const keyboardState = animatedKeyboardState.value;
+    const keyboardHeightInContainer = animatedKeyboardHeightInContainer.value;
+    const handleHeight = Math.max(0, animatedHandleHeight.value);
+    const containerHeight = animatedContainerHeight.value;
+    let contentHeight = animatedSheetHeight.value - handleHeight;
 
     switch (keyboardBehavior) {
       case KEYBOARD_BEHAVIOR.extend:
@@ -77,7 +77,7 @@ function BottomSheetContentComponent({
         break;
 
       case KEYBOARD_BEHAVIOR.fillParent:
-        if (!isInTemporaryPosition.get()) {
+        if (!isInTemporaryPosition.value) {
           break;
         }
 
@@ -90,7 +90,7 @@ function BottomSheetContentComponent({
         break;
 
       case KEYBOARD_BEHAVIOR.interactive: {
-        if (!isInTemporaryPosition.get()) {
+        if (!isInTemporaryPosition.value) {
           break;
         }
         const contentWithKeyboardHeight =
@@ -98,7 +98,7 @@ function BottomSheetContentComponent({
 
         if (keyboardState === KEYBOARD_STATE.SHOWN) {
           if (
-            keyboardHeightInContainer + animatedSheetHeight.get() >
+            keyboardHeightInContainer + animatedSheetHeight.value >
             containerHeight
           ) {
             contentHeight =
@@ -130,7 +130,7 @@ function BottomSheetContentComponent({
     keyboardBehavior,
   ]);
   const animatedPaddingBottom = useDerivedValue(() => {
-    const containerHeight = animatedContainerHeight.get();
+    const containerHeight = animatedContainerHeight.value;
     /**
      * if container height is not yet calculated, then we exit the method
      */
@@ -139,8 +139,8 @@ function BottomSheetContentComponent({
     }
 
     const highestSnapPoint = Math.max(
-      animatedHighestSnapPoint.get(),
-      animatedPosition.get()
+      animatedHighestSnapPoint.value,
+      animatedPosition.value
     );
     /**
      * added safe area to prevent the sheet from floating above
@@ -157,9 +157,9 @@ function BottomSheetContentComponent({
      * if keyboard is open, then we try to add padding to prevent content
      * from being covered by the keyboard.
      */
-    if (animatedKeyboardState.get() === KEYBOARD_STATE.SHOWN) {
+    if (animatedKeyboardState.value === KEYBOARD_STATE.SHOWN) {
       paddingBottom =
-        overDragSafePaddingBottom + animatedKeyboardHeightInContainer.get();
+        overDragSafePaddingBottom + animatedKeyboardHeightInContainer.value;
     }
 
     return paddingBottom;
@@ -178,7 +178,7 @@ function BottomSheetContentComponent({
     /**
      * if container height is not yet calculated, then we exit the method
      */
-    if (animatedContainerHeight.get() === INITIAL_CONTAINER_HEIGHT) {
+    if (animatedContainerHeight.value === INITIAL_CONTAINER_HEIGHT) {
       return {};
     }
 
@@ -188,12 +188,12 @@ function BottomSheetContentComponent({
      */
     if (
       enableDynamicSizing &&
-      animatedContentHeight.get() === INITIAL_CONTAINER_HEIGHT
+      animatedContentHeight.value === INITIAL_CONTAINER_HEIGHT
     ) {
       return {};
     }
 
-    const paddingBottom = detached ? 0 : animatedPaddingBottom.get();
+    const paddingBottom = detached ? 0 : animatedPaddingBottom.value;
 
     return {
       paddingBottom: animate({
@@ -202,7 +202,7 @@ function BottomSheetContentComponent({
         overrideReduceMotion,
       }),
       height: animate({
-        point: animatedContentHeightMax.get() + paddingBottom,
+        point: animatedContentHeightMax.value + paddingBottom,
         configs: animationConfigs,
         overrideReduceMotion,
       }),

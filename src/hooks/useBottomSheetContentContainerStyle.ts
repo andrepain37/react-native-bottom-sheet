@@ -59,7 +59,7 @@ export function useBottomSheetContentContainerStyle(
 
   //#region effects
   useAnimatedReaction(
-    () => animatedFooterHeight.get(),
+    () => animatedFooterHeight.value,
     (result, previousFooterHeight) => {
       if (!enableFooterMarginAdjustment) {
         return;
@@ -74,8 +74,8 @@ export function useBottomSheetContentContainerStyle(
          * This is needed due to the web layout the footer after the content.
          */
         if (result && !previousFooterHeight) {
-          const contentHeight = animatedContentHeight.get();
-          animatedContentHeight.set(contentHeight + result);
+          const contentHeight = animatedContentHeight.value;
+          animatedContentHeight.value = contentHeight + result;
         }
       }
     },

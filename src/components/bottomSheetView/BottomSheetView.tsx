@@ -41,7 +41,7 @@ function BottomSheetViewComponent({
   const handleLayout = useCallback(
     (event: LayoutChangeEvent) => {
       if (enableDynamicSizing) {
-        animatedContentHeight.set(event.nativeEvent.layout.height);
+        animatedContentHeight.value = event.nativeEvent.layout.height;
       }
 
       if (onLayout) {

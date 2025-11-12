@@ -18,10 +18,10 @@ function BottomSheetBodyComponent({ style, children }: BottomSheetBodyProps) {
   //#region styles
   const containerAnimatedStyle = useAnimatedStyle(
     () => ({
-      opacity: Platform.OS === 'android' && animatedIndex.get() === -1 ? 0 : 1,
+      opacity: Platform.OS === 'android' && animatedIndex.value === -1 ? 0 : 1,
       transform: [
         {
-          translateY: animatedPosition.get(),
+          translateY: animatedPosition.value,
         },
       ],
     }),

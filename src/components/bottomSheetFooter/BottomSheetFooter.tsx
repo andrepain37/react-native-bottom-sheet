@@ -28,12 +28,12 @@ function BottomSheetFooterComponent({
 
   //#region styles
   const containerAnimatedStyle = useAnimatedStyle(() => {
-    let footerTranslateY = animatedFooterPosition.get();
+    let footerTranslateY = animatedFooterPosition.value;
 
     /**
      * Offset the bottom inset only when keyboard is not shown
      */
-    if (animatedKeyboardState.get() !== KEYBOARD_STATE.SHOWN) {
+    if (animatedKeyboardState.value !== KEYBOARD_STATE.SHOWN) {
       footerTranslateY = footerTranslateY - bottomInset;
     }
 
@@ -58,7 +58,7 @@ function BottomSheetFooterComponent({
         layout: { height },
       },
     }: LayoutChangeEvent) => {
-      animatedFooterHeight.set(height);
+      animatedFooterHeight.value = height;
 
       if (__DEV__) {
         print({
@@ -75,7 +75,7 @@ function BottomSheetFooterComponent({
   );
   const handleBoundingClientRect = useCallback(
     ({ height }: BoundingClientRect) => {
-      animatedFooterHeight.set(height);
+      animatedFooterHeight.value = height;
 
       if (__DEV__) {
         print({

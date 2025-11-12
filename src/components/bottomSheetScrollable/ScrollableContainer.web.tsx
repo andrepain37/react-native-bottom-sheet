@@ -76,7 +76,7 @@ export const ScrollableContainer = forwardRef<
         /**
          * early exit if the content height been calculated.
          */
-        if (animatedContentHeight.get() !== INITIAL_CONTAINER_HEIGHT) {
+        if (animatedContentHeight.value !== INITIAL_CONTAINER_HEIGHT) {
           return;
         }
         // @ts-ignore
